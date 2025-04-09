@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import restapp.controller.dto.BookIncomingDto;
 import restapp.controller.dto.BookOutgoingDto;
-import restapp.mapper.BookMapper;
-import restapp.mapper.CycleAvoidingMappingContext;
+import restapp.controller.mapper.BookMapper;
+import restapp.controller.mapper.CycleAvoidingMappingContext;
 import restapp.model.Book;
 import restapp.repository.BookRepository;
 import restapp.service.BookService;
@@ -48,8 +48,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     @Transactional
-    public void update(int id, BookIncomingDto bookIncomingDto) {
-        bookIncomingDto.setId(id);
+    public void update(BookIncomingDto bookIncomingDto) {
         bookRepository.save(bookMapper.mapToBook(bookIncomingDto, context));
     }
 

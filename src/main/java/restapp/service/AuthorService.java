@@ -12,7 +12,7 @@ public interface AuthorService {
 
     public void save(AuthorIncomingDto authorIncomingDto);
 
-    public void update(int id, AuthorIncomingDto authorIncomingDto);
+    public void update(AuthorIncomingDto authorIncomingDto);
 
     public void delete(int id);
 }

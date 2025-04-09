@@ -1,15 +1,12 @@
 package restapp.model;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
-import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Book")
-public class Book {
+@Table(name = "Magazine")
+public class Magazine {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,24 +17,19 @@ public class Book {
 
     @Column(name = "quantity")
     private Integer quantity;
-    
-    @ManyToMany
-    @JoinTable(
-            name = "Book_Author",
-            joinColumns = @JoinColumn(name = "book_id"),
-            inverseJoinColumns = @JoinColumn(name = "author_id")
-    )
-    @Fetch(FetchMode.SUBSELECT)
-    private List<Author> authors;
 
-    public Book() {
+    @ManyToOne
+    @JoinColumn(name = "publisher_id")
+    private Publisher publisher;
+
+    public Magazine() {
     }
 
-    public Book(Integer id, String title, Integer quantity, List<Author> authors) {
+    public Magazine(Integer id, String title, Integer quantity, Publisher publisher) {
         this.id = id;
         this.title = title;
         this.quantity = quantity;
-        this.authors = authors;
+        this.publisher = publisher;
     }
 
     public Integer getId() {
@@ -64,17 +56,17 @@ public class Book {
         this.quantity = quantity;
     }
 
-    public List<Author> getAuthors() {
-        return authors;
+    public Publisher getPublisher() {
+        return publisher;
     }
 
-    public void setAuthors(List<Author> authors) {
-        this.authors = authors;
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
     }
 
     @Override
     public String toString() {
-        return "Book{" +
+        return "Magazine{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", quantity=" + quantity +
@@ -84,8 +76,8 @@ public class Book {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        Book book = (Book) o;
-        return Objects.equals(id, book.id) && Objects.equals(title, book.title);
+        Magazine magazine = (Magazine) o;
+        return Objects.equals(id, magazine.id) && Objects.equals(title, magazine.title);
     }
 
     @Override

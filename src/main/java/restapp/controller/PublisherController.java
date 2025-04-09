@@ -7,26 +7,26 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import restapp.controller.dto.BookIncomingDto;
-import restapp.controller.dto.BookOutgoingDto;
-import restapp.service.BookService;
+import restapp.controller.dto.PublisherIncomingDto;
+import restapp.controller.dto.PublisherOutgoingDto;
+import restapp.service.PublisherService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/books")
-public class BookController {
+@RequestMapping("/publishers")
+public class PublisherController {
     private final ObjectMapper objectMapper = new ObjectMapper();
-    private final BookService bookService;
+    private final PublisherService publisherService;
 
     @Autowired
-    public BookController(BookService bookService) {
-        this.bookService = bookService;
+    public PublisherController(PublisherService publisherService) {
+        this.publisherService = publisherService;
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> index() throws JsonProcessingException {
-        List<BookOutgoingDto> list = bookService.findAll();
+        List<PublisherOutgoingDto> list = publisherService.findAll();
 
         String result = objectMapper.writeValueAsString(list);
 
@@ -35,35 +35,35 @@ public class BookController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> show(@PathVariable("id") int id) throws JsonProcessingException {
-        String result = objectMapper.writeValueAsString(bookService.findOne(id));
+        String result = objectMapper.writeValueAsString(publisherService.findOne(id));
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> create(@RequestBody BookIncomingDto bookIncomingDto)
+    public ResponseEntity<String> create(@RequestBody PublisherIncomingDto publisherIncomingDto)
             throws JsonProcessingException {
-        bookService.save(bookIncomingDto);
+        publisherService.save(publisherIncomingDto);
 
-        String result = objectMapper.writeValueAsString(bookIncomingDto);
+        String result = objectMapper.writeValueAsString(publisherIncomingDto);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody BookIncomingDto bookIncomingDto,
+    public ResponseEntity<String> update(@RequestBody PublisherIncomingDto publisherIncomingDto,
                                          @PathVariable("id") int id) throws JsonProcessingException {
-        bookIncomingDto.setId(id);
-        bookService.update(bookIncomingDto);
+        publisherIncomingDto.setId(id);
+        publisherService.update(publisherIncomingDto);
 
-        String result = objectMapper.writeValueAsString(bookIncomingDto);
+        String result = objectMapper.writeValueAsString(publisherIncomingDto);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> delete(@PathVariable("id") int id) throws JsonProcessingException {
-        bookService.delete(id);
+        publisherService.delete(id);
 
         String result = objectMapper.writeValueAsString(id);
 

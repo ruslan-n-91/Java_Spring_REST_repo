@@ -3,24 +3,23 @@ package restapp.controller.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Objects;
-import java.util.Set;
 
-public class BookIncomingDto {
+public class MagazineIncomingDto {
     private Integer id;
     private String title;
     private Integer quantity;
-    
-    @JsonIgnoreProperties("books")
-    private Set<AuthorIncomingDto> authors;
 
-    public BookIncomingDto() {
+    @JsonIgnoreProperties("magazines")
+    private PublisherIncomingDto publisher;
+
+    public MagazineIncomingDto() {
     }
 
-    public BookIncomingDto(Integer id, String title, Integer quantity, Set<AuthorIncomingDto> authors) {
+    public MagazineIncomingDto(Integer id, String title, Integer quantity, PublisherIncomingDto publisher) {
         this.id = id;
         this.title = title;
         this.quantity = quantity;
-        this.authors = authors;
+        this.publisher = publisher;
     }
 
     public Integer getId() {
@@ -47,17 +46,17 @@ public class BookIncomingDto {
         this.quantity = quantity;
     }
 
-    public Set<AuthorIncomingDto> getAuthors() {
-        return authors;
+    public PublisherIncomingDto getPublisher() {
+        return publisher;
     }
 
-    public void setAuthors(Set<AuthorIncomingDto> authors) {
-        this.authors = authors;
+    public void setPublisher(PublisherIncomingDto publisher) {
+        this.publisher = publisher;
     }
 
     @Override
     public String toString() {
-        return "BookIncomingDto{" +
+        return "MagazineIncomingDto{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 '}';
@@ -66,7 +65,7 @@ public class BookIncomingDto {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        BookIncomingDto that = (BookIncomingDto) o;
+        MagazineIncomingDto that = (MagazineIncomingDto) o;
         return Objects.equals(id, that.id) && Objects.equals(title, that.title);
     }
 

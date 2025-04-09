@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import restapp.controller.dto.AuthorIncomingDto;
 import restapp.controller.dto.AuthorOutgoingDto;
-import restapp.mapper.AuthorMapper;
-import restapp.mapper.CycleAvoidingMappingContext;
+import restapp.controller.mapper.AuthorMapper;
+import restapp.controller.mapper.CycleAvoidingMappingContext;
 import restapp.model.Author;
 import restapp.repository.AuthorRepository;
 import restapp.service.AuthorService;
@@ -48,8 +48,7 @@ public class AuthorServiceImpl implements AuthorService {
 
     @Override
     @Transactional
-    public void update(int id, AuthorIncomingDto authorIncomingDto) {
-        authorIncomingDto.setId(id);
+    public void update(AuthorIncomingDto authorIncomingDto) {
         authorRepository.save(authorMapper.mapToAuthor(authorIncomingDto, context));
     }
 

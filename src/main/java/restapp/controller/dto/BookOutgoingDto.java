@@ -9,6 +9,7 @@ public class BookOutgoingDto {
     private Integer id;
     private String title;
     private Integer quantity;
+    
     @JsonIgnoreProperties("books")
     private Set<AuthorOutgoingDto> authors;
 

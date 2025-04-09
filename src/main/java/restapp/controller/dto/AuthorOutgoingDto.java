@@ -8,6 +8,7 @@ import java.util.Set;
 public class AuthorOutgoingDto {
     private Integer id;
     private String name;
+    
     @JsonIgnoreProperties("authors")
     private Set<BookOutgoingDto> books;
 

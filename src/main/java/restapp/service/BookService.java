@@ -12,7 +12,7 @@ public interface BookService {
 
     public void save(BookIncomingDto bookIncomingDto);
 
-    public void update(int id, BookIncomingDto bookIncomingDto);
+    public void update(BookIncomingDto bookIncomingDto);
 
     public void delete(int id);
 }

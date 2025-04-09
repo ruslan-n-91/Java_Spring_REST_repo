@@ -2,30 +2,30 @@ package restapp.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-public class AuthorIncomingDto {
-    private Integer id;
+public class PublisherOutgoingDto {
+    private int id;
     private String name;
 
-    @JsonIgnoreProperties("authors")
-    private Set<BookIncomingDto> books;
+    @JsonIgnoreProperties("publisher")
+    private List<MagazineOutgoingDto> magazines;
 
-    public AuthorIncomingDto() {
+    public PublisherOutgoingDto() {
     }
 
-    public AuthorIncomingDto(Integer id, String name, Set<BookIncomingDto> books) {
+    public PublisherOutgoingDto(int id, String name, List<MagazineOutgoingDto> magazines) {
         this.id = id;
         this.name = name;
-        this.books = books;
+        this.magazines = magazines;
     }
 
-    public Integer getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -37,17 +37,17 @@ public class AuthorIncomingDto {
         this.name = name;
     }
 
-    public Set<BookIncomingDto> getBooks() {
-        return books;
+    public List<MagazineOutgoingDto> getMagazines() {
+        return magazines;
     }
 
-    public void setBooks(Set<BookIncomingDto> books) {
-        this.books = books;
+    public void setMagazines(List<MagazineOutgoingDto> magazines) {
+        this.magazines = magazines;
     }
 
     @Override
     public String toString() {
-        return "AuthorIncomingDto{" +
+        return "PublisherOutgoingDto{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 '}';
@@ -56,8 +56,8 @@ public class AuthorIncomingDto {
     @Override
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
-        AuthorIncomingDto that = (AuthorIncomingDto) o;
-        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
+        PublisherOutgoingDto that = (PublisherOutgoingDto) o;
+        return id == that.id && Objects.equals(name, that.name);
     }
 
     @Override

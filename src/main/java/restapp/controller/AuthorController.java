@@ -41,7 +41,8 @@ public class AuthorController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> create(@RequestBody AuthorIncomingDto authorIncomingDto) throws JsonProcessingException {
+    public ResponseEntity<String> create(@RequestBody AuthorIncomingDto authorIncomingDto)
+            throws JsonProcessingException {
         authorService.save(authorIncomingDto);
 
         String result = objectMapper.writeValueAsString(authorIncomingDto);
@@ -52,7 +53,8 @@ public class AuthorController {
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> update(@RequestBody AuthorIncomingDto authorIncomingDto,
                                          @PathVariable("id") int id) throws JsonProcessingException {
-        authorService.update(id, authorIncomingDto);
+        authorIncomingDto.setId(id);
+        authorService.update(authorIncomingDto);
 
         String result = objectMapper.writeValueAsString(authorIncomingDto);
 

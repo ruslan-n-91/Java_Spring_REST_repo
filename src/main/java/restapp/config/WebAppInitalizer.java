@@ -49,23 +49,3 @@ public class WebAppInitalizer extends AbstractAnnotationConfigDispatcherServletI
         characterEncoding.addMappingForUrlPatterns(dispatcherTypes, true, "/*");
     }
 }
-
-//@Configuration
-//@EnableWebMvc
-//@ComponentScan("restapp")
-//public class WebAppInitalizer extends AbstractAnnotationConfigDispatcherServletInitializer {
-//    @Override
-//    protected String[] getServletMappings() {
-//        return new String[]{"/"};
-//    }
-//
-//    @Override
-//    protected Class<?>[] getRootConfigClasses() {
-//        return new Class<?>[]{WebAppInitalizer.class};
-//    }
-//
-//    @Override
-//    protected Class<?>[] getServletConfigClasses() {
-//        return new Class[0];
-//    }
-//}
