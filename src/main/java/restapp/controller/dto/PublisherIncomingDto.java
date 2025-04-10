@@ -2,30 +2,30 @@ package restapp.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 public class PublisherIncomingDto {
-    private int id;
+    private Integer id;
     private String name;
 
     @JsonIgnoreProperties("publisher")
-    private List<MagazineIncomingDto> magazines;
+    private Set<MagazineIncomingDto> magazines;
 
     public PublisherIncomingDto() {
     }
 
-    public PublisherIncomingDto(int id, String name, List<MagazineIncomingDto> magazines) {
+    public PublisherIncomingDto(Integer id, String name, Set<MagazineIncomingDto> magazines) {
         this.id = id;
         this.name = name;
         this.magazines = magazines;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -37,11 +37,11 @@ public class PublisherIncomingDto {
         this.name = name;
     }
 
-    public List<MagazineIncomingDto> getMagazines() {
+    public Set<MagazineIncomingDto> getMagazines() {
         return magazines;
     }
 
-    public void setMagazines(List<MagazineIncomingDto> magazines) {
+    public void setMagazines(Set<MagazineIncomingDto> magazines) {
         this.magazines = magazines;
     }
 
@@ -57,7 +57,7 @@ public class PublisherIncomingDto {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         PublisherIncomingDto that = (PublisherIncomingDto) o;
-        return id == that.id && Objects.equals(name, that.name);
+        return Objects.equals(id, that.id) && Objects.equals(name, that.name);
     }
 
     @Override

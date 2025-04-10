@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "Publisher")
@@ -13,7 +13,7 @@ public class Publisher {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(name = "name")
     private String name;
@@ -21,22 +21,22 @@ public class Publisher {
     @OneToMany
     @JoinColumn(name = "publisher_id")
     @Fetch(FetchMode.SUBSELECT)
-    private List<Magazine> magazines;
+    private Set<Magazine> magazines;
 
     public Publisher() {
     }
 
-    public Publisher(int id, String name, List<Magazine> magazines) {
+    public Publisher(Integer id, String name, Set<Magazine> magazines) {
         this.id = id;
         this.name = name;
         this.magazines = magazines;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -48,11 +48,11 @@ public class Publisher {
         this.name = name;
     }
 
-    public List<Magazine> getMagazines() {
+    public Set<Magazine> getMagazines() {
         return magazines;
     }
 
-    public void setMagazines(List<Magazine> magazines) {
+    public void setMagazines(Set<Magazine> magazines) {
         this.magazines = magazines;
     }
 
@@ -68,7 +68,7 @@ public class Publisher {
     public boolean equals(Object o) {
         if (o == null || getClass() != o.getClass()) return false;
         Publisher publisher = (Publisher) o;
-        return id == publisher.id && Objects.equals(name, publisher.name);
+        return Objects.equals(id, publisher.id) && Objects.equals(name, publisher.name);
     }
 
     @Override

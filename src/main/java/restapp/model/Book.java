@@ -4,8 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 @Table(name = "Book")
@@ -28,12 +28,12 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "author_id")
     )
     @Fetch(FetchMode.SUBSELECT)
-    private List<Author> authors;
+    private Set<Author> authors;
 
     public Book() {
     }
 
-    public Book(Integer id, String title, Integer quantity, List<Author> authors) {
+    public Book(Integer id, String title, Integer quantity, Set<Author> authors) {
         this.id = id;
         this.title = title;
         this.quantity = quantity;
@@ -64,11 +64,11 @@ public class Book {
         this.quantity = quantity;
     }
 
-    public List<Author> getAuthors() {
+    public Set<Author> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(List<Author> authors) {
+    public void setAuthors(Set<Author> authors) {
         this.authors = authors;
     }
 
