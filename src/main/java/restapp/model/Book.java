@@ -20,7 +20,7 @@ public class Book {
 
     @Column(name = "quantity")
     private Integer quantity;
-    
+
     @ManyToMany
     @JoinTable(
             name = "Book_Author",
