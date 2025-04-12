@@ -1,7 +1,5 @@
 package restapp.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/publishers")
 public class PublisherController {
-    private final ObjectMapper objectMapper = new ObjectMapper();
     private final PublisherService publisherService;
 
     @Autowired
@@ -25,48 +22,39 @@ public class PublisherController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> index() throws JsonProcessingException {
-        List<PublisherOutgoingDto> list = publisherService.findAll();
-
-        String result = objectMapper.writeValueAsString(list);
+    public ResponseEntity<List<PublisherOutgoingDto>> index() {
+        List<PublisherOutgoingDto> result = publisherService.findAll();
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> show(@PathVariable("id") int id) throws JsonProcessingException {
-        String result = objectMapper.writeValueAsString(publisherService.findOne(id));
+    public ResponseEntity<PublisherOutgoingDto> show(@PathVariable("id") int id) {
+        PublisherOutgoingDto result = publisherService.findOne(id);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> create(@RequestBody PublisherIncomingDto publisherIncomingDto)
-            throws JsonProcessingException {
+    public ResponseEntity<PublisherIncomingDto> create(@RequestBody PublisherIncomingDto publisherIncomingDto) {
         publisherService.save(publisherIncomingDto);
 
-        String result = objectMapper.writeValueAsString(publisherIncomingDto);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(publisherIncomingDto, HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody PublisherIncomingDto publisherIncomingDto,
-                                         @PathVariable("id") int id) throws JsonProcessingException {
+    public ResponseEntity<PublisherIncomingDto> update(@RequestBody PublisherIncomingDto publisherIncomingDto,
+                                                       @PathVariable("id") int id) {
         publisherIncomingDto.setId(id);
         publisherService.update(publisherIncomingDto);
 
-        String result = objectMapper.writeValueAsString(publisherIncomingDto);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(publisherIncomingDto, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> delete(@PathVariable("id") int id) throws JsonProcessingException {
+    public ResponseEntity<Integer> delete(@PathVariable("id") int id) {
         publisherService.delete(id);
 
-        String result = objectMapper.writeValueAsString(id);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }

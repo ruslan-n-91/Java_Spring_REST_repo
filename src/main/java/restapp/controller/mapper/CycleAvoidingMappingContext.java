@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class CycleAvoidingMappingContext {
-    private Map<Object, Object> knownInstances = new IdentityHashMap<Object, Object>();
+    private Map<Object, Object> knownInstances = new IdentityHashMap<>();
 
     @BeforeMapping
     public <T> T getMappedInstance(Object source, @TargetType Class<T> targetType) {

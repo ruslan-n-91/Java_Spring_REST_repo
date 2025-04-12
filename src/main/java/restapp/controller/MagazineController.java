@@ -1,7 +1,5 @@
 package restapp.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -16,7 +14,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/magazines")
 public class MagazineController {
-    private final ObjectMapper objectMapper = new ObjectMapper();
     private final MagazineService magazineService;
 
     @Autowired
@@ -25,48 +22,39 @@ public class MagazineController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> index() throws JsonProcessingException {
-        List<MagazineOutgoingDto> list = magazineService.findAll();
-
-        String result = objectMapper.writeValueAsString(list);
+    public ResponseEntity<List<MagazineOutgoingDto>> index() {
+        List<MagazineOutgoingDto> result = magazineService.findAll();
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> show(@PathVariable("id") int id) throws JsonProcessingException {
-        String result = objectMapper.writeValueAsString(magazineService.findOne(id));
+    public ResponseEntity<MagazineOutgoingDto> show(@PathVariable("id") int id) {
+        MagazineOutgoingDto result = magazineService.findOne(id);
 
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> create(@RequestBody MagazineIncomingDto magazineIncomingDto)
-            throws JsonProcessingException {
+    public ResponseEntity<MagazineIncomingDto> create(@RequestBody MagazineIncomingDto magazineIncomingDto) {
         magazineService.save(magazineIncomingDto);
 
-        String result = objectMapper.writeValueAsString(magazineIncomingDto);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(magazineIncomingDto, HttpStatus.OK);
     }
 
     @PutMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> update(@RequestBody MagazineIncomingDto magazineIncomingDto,
-                                         @PathVariable("id") int id) throws JsonProcessingException {
+    public ResponseEntity<MagazineIncomingDto> update(@RequestBody MagazineIncomingDto magazineIncomingDto,
+                                                      @PathVariable("id") int id) {
         magazineIncomingDto.setId(id);
         magazineService.update(magazineIncomingDto);
 
-        String result = objectMapper.writeValueAsString(magazineIncomingDto);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(magazineIncomingDto, HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<String> delete(@PathVariable("id") int id) throws JsonProcessingException {
+    public ResponseEntity<Integer> delete(@PathVariable("id") int id) {
         magazineService.delete(id);
 
-        String result = objectMapper.writeValueAsString(id);
-
-        return new ResponseEntity<>(result, HttpStatus.OK);
+        return new ResponseEntity<>(id, HttpStatus.OK);
     }
 }
