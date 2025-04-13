@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionHandler {
     @ExceptionHandler(produces = MediaType.TEXT_PLAIN_VALUE)
     public ResponseEntity<String> handleException(Exception ex) {
-        String string = "Error message : " + ex.getMessage();
+        String string = "Error occurred: " + ex.getClass().getSimpleName();
         return new ResponseEntity<>(string, HttpStatus.BAD_REQUEST);
     }
 }

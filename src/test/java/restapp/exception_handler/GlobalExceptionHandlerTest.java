@@ -10,6 +10,6 @@ class GlobalExceptionHandlerTest {
     void exceptionHandlerShould_set400StatusCodeAndSendErrorMessage_ifAnyExceptionThrown() {
         var responseEntity = globalExceptionHandler.handleException(new Exception());
         Assertions.assertEquals(400, responseEntity.getStatusCode().value());
-        Assertions.assertTrue(responseEntity.getBody().contains("Error message :"));
+        Assertions.assertTrue(responseEntity.getBody().contains("Error occurred: "));
     }
 }

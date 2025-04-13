@@ -21,6 +21,8 @@
         <hibernate.version>6.6.11.Final</hibernate.version>
         <spring-data-jpa.version>3.4.4</spring-data-jpa.version>
         <testcontainers.version>1.20.6</testcontainers.version>
+        <junit-jupiter.version>5.11.4</junit-jupiter.version>
+        <jakarta-servlet-api.version>6.1.0</jakarta-servlet-api.version>
     </properties>
 
     <dependencies>
@@ -57,7 +59,7 @@
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
-            <version>6.1.0</version>
+            <version>${jakarta-servlet-api.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -124,7 +126,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-api</artifactId>
-            <version>5.11.4</version>
+            <version>${junit-jupiter.version}</version>
             <scope>test</scope>
         </dependency>
 
