@@ -29,7 +29,7 @@ class BookRepositoryTest {
 
     @Container
     static PostgreSQLContainer<?> postgres = new PostgreSQLContainer<>(
-            "postgres:16-alpine")
+            "postgres")
             .withDatabaseName("java_spring_rest_db")
             .withUsername("postgres")
             .withPassword("postgres")

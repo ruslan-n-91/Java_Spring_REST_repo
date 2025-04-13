@@ -1,6 +1,5 @@
 package restapp.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,21 +27,21 @@ class MagazineControllerTest {
     }
 
     @Test
-    void indexShouldCallFindAllFromService() throws JsonProcessingException {
+    void indexShouldCallFindAllFromService() {
         magazineController.index();
 
         Mockito.verify(mockMagazineService).findAll();
     }
 
     @Test
-    void showShouldCallFindOneFromService() throws JsonProcessingException {
+    void showShouldCallFindOneFromService() {
         magazineController.show(53);
 
         Mockito.verify(mockMagazineService).findOne(53);
     }
 
     @Test
-    void createShouldCallSaveFromService_AndShouldSendValidDto() throws JsonProcessingException {
+    void createShouldCallSaveFromService_AndShouldSendValidDto() {
         PublisherIncomingDto publisherIncomingDto1 = new PublisherIncomingDto(1, null, null);
         MagazineIncomingDto magazineIncomingDto = new MagazineIncomingDto(null, "Some Magazine 35",
                 20, publisherIncomingDto1);
@@ -61,7 +60,7 @@ class MagazineControllerTest {
     }
 
     @Test
-    void updateShouldCallUpdateFromService_AndShouldSendValidDto() throws JsonProcessingException {
+    void updateShouldCallUpdateFromService_AndShouldSendValidDto() {
         PublisherIncomingDto publisherIncomingDto1 = new PublisherIncomingDto(3, null, null);
         MagazineIncomingDto magazineIncomingDto = new MagazineIncomingDto(null, "Some Magazine 35",
                 20, publisherIncomingDto1);
@@ -81,7 +80,7 @@ class MagazineControllerTest {
     }
 
     @Test
-    void deleteShouldCallDeleteFromService_AndShouldSendId() throws JsonProcessingException {
+    void deleteShouldCallDeleteFromService_AndShouldSendId() {
         magazineController.delete(45);
 
         Mockito.verify(mockMagazineService).delete(45);

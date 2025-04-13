@@ -1,6 +1,5 @@
 package restapp.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,21 +30,21 @@ class BookControllerTest {
     }
 
     @Test
-    void indexShouldCallFindAllFromService() throws JsonProcessingException {
+    void indexShouldCallFindAllFromService() {
         bookController.index();
 
         Mockito.verify(mockBookService).findAll();
     }
 
     @Test
-    void showShouldCallFindOneFromService() throws JsonProcessingException {
+    void showShouldCallFindOneFromService() {
         bookController.show(53);
 
         Mockito.verify(mockBookService).findOne(53);
     }
 
     @Test
-    void createShouldCallSaveFromService_AndShouldSendValidDto() throws JsonProcessingException {
+    void createShouldCallSaveFromService_AndShouldSendValidDto() {
         AuthorIncomingDto authorIncomingDto1 = new AuthorIncomingDto(1, null, null);
         AuthorIncomingDto authorIncomingDto2 = new AuthorIncomingDto(2, null, null);
         BookIncomingDto bookIncomingDto = new BookIncomingDto(null, "Some Book 35", 20,
@@ -68,7 +67,7 @@ class BookControllerTest {
     }
 
     @Test
-    void updateShouldCallUpdateFromService_AndShouldSendValidDto() throws JsonProcessingException {
+    void updateShouldCallUpdateFromService_AndShouldSendValidDto() {
         AuthorIncomingDto authorIncomingDto1 = new AuthorIncomingDto(3, null, null);
         BookIncomingDto bookIncomingDto = new BookIncomingDto(null, "Some Book 35", 20,
                 new HashSet<>(Set.of(authorIncomingDto1)));
@@ -89,7 +88,7 @@ class BookControllerTest {
     }
 
     @Test
-    void deleteShouldCallDeleteFromService_AndShouldSendId() throws JsonProcessingException {
+    void deleteShouldCallDeleteFromService_AndShouldSendId() {
         bookController.delete(45);
 
         Mockito.verify(mockBookService).delete(45);

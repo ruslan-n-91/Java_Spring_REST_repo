@@ -1,6 +1,5 @@
 package restapp.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -31,21 +30,21 @@ class PublisherControllerTest {
     }
 
     @Test
-    void indexShouldCallFindAllFromService() throws JsonProcessingException {
+    void indexShouldCallFindAllFromService() {
         publisherController.index();
 
         Mockito.verify(mockPublisherService).findAll();
     }
 
     @Test
-    void showShouldCallFindOneFromService() throws JsonProcessingException {
+    void showShouldCallFindOneFromService() {
         publisherController.show(53);
 
         Mockito.verify(mockPublisherService).findOne(53);
     }
 
     @Test
-    void createShouldCallSaveFromService_AndShouldSendValidDto() throws JsonProcessingException {
+    void createShouldCallSaveFromService_AndShouldSendValidDto() {
         MagazineIncomingDto magazineIncomingDto1 = new MagazineIncomingDto(1, null, null, null);
         MagazineIncomingDto magazineIncomingDto2 = new MagazineIncomingDto(2, null, null, null);
         PublisherIncomingDto publisherIncomingDto = new PublisherIncomingDto(null, "Some Publisher 35",
@@ -67,7 +66,7 @@ class PublisherControllerTest {
     }
 
     @Test
-    void updateShouldCallUpdateFromService_AndShouldSendValidDto() throws JsonProcessingException {
+    void updateShouldCallUpdateFromService_AndShouldSendValidDto() {
         MagazineIncomingDto magazineIncomingDto1 = new MagazineIncomingDto(3, null, null, null);
         PublisherIncomingDto publisherIncomingDto = new PublisherIncomingDto(null, "Some Publisher 35",
                 new HashSet<>(Set.of(magazineIncomingDto1)));
@@ -87,7 +86,7 @@ class PublisherControllerTest {
     }
 
     @Test
-    void deleteShouldCallDeleteFromService_AndShouldSendId() throws JsonProcessingException {
+    void deleteShouldCallDeleteFromService_AndShouldSendId() {
         publisherController.delete(45);
 
         Mockito.verify(mockPublisherService).delete(45);
